@@ -1,0 +1,1144 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+  
+  
+  <link rel="stylesheet" media="all" href="/lib/Han/dist/han.min.css?v=3.3">
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="四舍五入,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="&amp;emsp;&amp;emsp;在最近的项目中，同事在做报表统计订单金额相关的问题时，由于数据类型采用了float，在最后统计对账时始终和财务相差几毛钱，然后我看了下代码，发现是四舍五入的问题，在此再根据网上的资料再学习下java中的四舍五入与保留位。">
+<meta name="keywords" content="四舍五入">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JAVA总结-四舍五入与保留位">
+<meta property="og:url" content="http:blog.plaxj.com/2017/05/11/JAVA总结-四舍五入与保留位.html">
+<meta property="og:site_name" content="Yeanson&#39;s blog">
+<meta property="og:description" content="&amp;emsp;&amp;emsp;在最近的项目中，同事在做报表统计订单金额相关的问题时，由于数据类型采用了float，在最后统计对账时始终和财务相差几毛钱，然后我看了下代码，发现是四舍五入的问题，在此再根据网上的资料再学习下java中的四舍五入与保留位。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-07-08T01:17:44.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="JAVA总结-四舍五入与保留位">
+<meta name="twitter:description" content="&amp;emsp;&amp;emsp;在最近的项目中，同事在做报表统计订单金额相关的问题时，由于数据类型采用了float，在最后统计对账时始终和财务相差几毛钱，然后我看了下代码，发现是四舍五入的问题，在此再根据网上的资料再学习下java中的四舍五入与保留位。">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http:blog.plaxj.com/2017/05/11/JAVA总结-四舍五入与保留位.html">
+
+
+
+
+
+  <title>JAVA总结-四舍五入与保留位 | Yeanson's blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Yeanson's blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http:blog.plaxj.com/2017/05/11/JAVA总结-四舍五入与保留位.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="yeanson">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Yeanson's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">JAVA总结-四舍五入与保留位</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-11T00:00:00+08:00">
+                2017-05-11
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/JAVA/" itemprop="url" rel="index">
+                    <span itemprop="name">JAVA</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body han-init-context" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>&emsp;&emsp;在最近的项目中，同事在做报表统计订单金额相关的问题时，由于数据类型采用了float，在最后统计对账时始终和财务相差几毛钱，然后我看了下代码，发现是四舍五入的问题，在此再根据网上的资料再学习下java中的四舍五入与保留位。</p>
+<a id="more"></a>
+<h2 id="Math类的四舍五入函数"><a href="#Math类的四舍五入函数" class="headerlink" title="Math类的四舍五入函数"></a>Math类的四舍五入函数</h2><p>　　java在四舍五入计算时，可以使用Math类提供的函数实现四舍五入：</p>
+<h3 id="Math-round"><a href="#Math-round" class="headerlink" title="Math.round()"></a>Math.round()</h3><p>　　Math.round():Returns the closest long to the argument, with ties rounding to positive infinity.返回最接近入参的整数：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">double</span> n = <span class="number">2.4</span>, i = <span class="number">2.5</span>,j = -<span class="number">2.3</span>,k = -<span class="number">2.6</span>;</span><br><span class="line">        System.out.println(<span class="string">"2.4 round四舍五入："</span>+Math.round(n));</span><br><span class="line">        System.out.println(<span class="string">"2.5 round四舍五入："</span>+Math.round(i));</span><br><span class="line">        System.out.println(<span class="string">"-2.3 round四舍五入："</span>+Math.round(j));</span><br><span class="line">        System.out.println(<span class="string">"-2.6 round四舍五入："</span>+Math.round(k));</span><br><span class="line">            </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>output:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">2.4 round四舍五入：2</span><br><span class="line">2.5 round四舍五入：3</span><br><span class="line">-2.3 round四舍五入：-2</span><br><span class="line">-2.6 round四舍五入：-3</span><br></pre></td></tr></table></figure>
+
+<h3 id="Math-floor"><a href="#Math-floor" class="headerlink" title="Math.floor()"></a>Math.floor()</h3><p>　　Math.floor():Returns the largest (closest to positive infinity) double value that is less than or equal to the argument and is equal to a mathematical integer.返回小于或者等于入参的整数,向下取整。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">double</span> n = <span class="number">2.4</span>, i = <span class="number">2.5</span>,j = -<span class="number">2.3</span>,k = -<span class="number">2.6</span>;</span><br><span class="line">        System.out.println(<span class="string">"2.4 floor四舍五入："</span>+Math.floor(n));</span><br><span class="line">        System.out.println(<span class="string">"2.5 floor四舍五入："</span>+Math.floor(i));</span><br><span class="line">        System.out.println(<span class="string">"-2.3 floor四舍五入："</span>+Math.floor(j));</span><br><span class="line">        System.out.println(<span class="string">"-2.6 floor四舍五入："</span>+Math.floor(k));</span><br><span class="line">                </span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<p>output:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">2.4 floor四舍五入：2.0</span><br><span class="line">2.5 floor四舍五入：2.0</span><br><span class="line">-2.3 floor四舍五入：-3.0</span><br><span class="line">-2.6 floor四舍五入：-3.0</span><br></pre></td></tr></table></figure>
+
+<h3 id="Math-ceil"><a href="#Math-ceil" class="headerlink" title="Math.ceil()"></a>Math.ceil()</h3><p>　　Math.ceil():Returns the smallest (closest to negative infinity) double value that is greater than or equal to the argument and is equal to a mathematical integer.返回大于或者等于入参的整数,向上取整。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">double</span> n = <span class="number">2.4</span>, i = <span class="number">2.5</span>,j = -<span class="number">2.3</span>,k = -<span class="number">2.6</span>;</span><br><span class="line">        System.out.println(<span class="string">"2.4 ceil四舍五入："</span>+Math.ceil(n));</span><br><span class="line">        System.out.println(<span class="string">"2.5 ceil四舍五入："</span>+Math.ceil(i));</span><br><span class="line">        System.out.println(<span class="string">"-2.3 ceil四舍五入："</span>+Math.ceil(j));</span><br><span class="line">        System.out.println(<span class="string">"-2.6 ceil四舍五入："</span>+Math.ceil(k));</span><br><span class="line">                </span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<p>output:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">2.4 ceil四舍五入：3.0</span><br><span class="line">2.5 ceil四舍五入：3.0</span><br><span class="line">-2.3 ceil四舍五入：-2.0</span><br><span class="line">-2.6 ceil四舍五入：-2.0</span><br></pre></td></tr></table></figure>
+
+<h3 id="四舍五入的同时保留有效位数"><a href="#四舍五入的同时保留有效位数" class="headerlink" title="四舍五入的同时保留有效位数"></a>四舍五入的同时保留有效位数</h3><p>由于Math类提供的四舍五入函数只能保留到整数，当我们想保留多少位小数的时候就得采用如下方式了：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">double</span> a=<span class="number">20.1554</span>;</span><br><span class="line">        System.out.println(<span class="string">"保留两位小数:"</span>+Math.round(a*<span class="number">100.0</span>)/<span class="number">100.0</span>);</span><br><span class="line">        System.out.println(<span class="string">"保留3位小数:"</span>+Math.round(a*<span class="number">1000.0</span>)/<span class="number">1000.0</span>);</span><br><span class="line">                </span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<p>output:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">保留两位小数:20.16</span><br><span class="line">保留3位小数:20.155</span><br></pre></td></tr></table></figure>
+
+<h3 id="float-double精度误差"><a href="#float-double精度误差" class="headerlink" title="float/double精度误差"></a>float/double精度误差</h3><p>　　在使用float和double的时候，往往会产生精度损失，如下面的例子(double类型)：<br>0.09 + 0.01=0.1?<br>10.0125 * 100=1001.25?<br>3.03 / 100=0.0303?<br>然而实际的输出值:<br>0.09999999999999999<br>1001.2499999999999<br>0.030299999999999997<br>因此在使用float和double的计算中可能会出现精度的损失，造成最终结果的误差</p>
+<h2 id="BigDecimal与RoundingMode"><a href="#BigDecimal与RoundingMode" class="headerlink" title="BigDecimal与RoundingMode"></a>BigDecimal与RoundingMode</h2><h3 id="RoundingMode"><a href="#RoundingMode" class="headerlink" title="RoundingMode"></a>RoundingMode</h3><p>　　在采用Math.round()方法实现四舍五入的话，在计算金额方面特别是银行业务上，会与专业的财务计算方式产生误差，通过下面的简单例子说明：比如现在有10笔存款，产生的利息为100.000、100.001、100.002、100.003、100.004、100.005、100.006、100.007、100.008、100.009，如果按照以往的四舍五入的方法的话，在结算给客户的时候(加入保留两位):0.001、0.002、0.003、0.004舍去，五入部分：0.005、0.004、0.003、0.002、0.001，则对于这10笔利息，银行实际的收支为：0.001+0.002+0.003+0.004-0.005-0.004-0.003-0.002-0.001=-0.005，银行亏0.005，虽然金额小，但是银行的业务量巨大，也会产生很大的误差，那么用什么方法来解决呢？<br>　　美国的银行家提出了四舍六入五取偶（又称四舍六入五留双）法，即当舍去位的数值小于5时，直接舍去该位；当舍去位的数值大于等于6时，在舍去该位的同时向前位进一；当舍去位的数值等于5时，如果前位数值为奇，则在舍去该位的同时向前位进一，如果前位数值为偶，则直接舍去该位。如：100.001～100.004都会舍去，100.006～100.009都会五入，100.005由于舍去位为5，前位为偶数，因此舍去。因此对于这10笔存款的利息最后银行收支为：0.001+0.002+0.003+0.004+0.005-0.004-0.003-0.002-0.001=0.005，这样会少付0.005的利息</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// double 类型</span></span><br><span class="line">        <span class="keyword">double</span> storeMoney = <span class="number">100000.00</span>;</span><br><span class="line">        <span class="keyword">double</span> interest = <span class="number">0.002512453</span>;<span class="comment">// 一个月利率</span></span><br><span class="line">        <span class="keyword">double</span> total = Math.round(storeMoney * interest*<span class="number">100.0</span>)/<span class="number">100.0</span>;</span><br><span class="line">        System.out.println(<span class="string">"利息："</span> + total);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// BigDecimal</span></span><br><span class="line"></span><br><span class="line">        BigDecimal storeMoneyTotal = <span class="keyword">new</span> BigDecimal(<span class="string">"100000.00"</span>);</span><br><span class="line">        BigDecimal newInterest = <span class="keyword">new</span> BigDecimal(<span class="string">"0.002512353"</span>);</span><br><span class="line">        System.out.println(<span class="string">"利息："</span> + storeMoneyTotal.multiply(newInterest).setScale(<span class="number">2</span>, RoundingMode.HALF_EVEN));<span class="comment">//银行家舍入法</span></span><br><span class="line"></span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<p>output:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">利息：251.25</span><br><span class="line">利息：251.24</span><br></pre></td></tr></table></figure>
+
+<p>RoundingMode提供的四舍五入类型：</p>
+<ol>
+<li>ROUND_UP：远离零方向舍入。向绝对值最大的方向舍入，只要舍弃位非0即进位。</li>
+<li>ROUND_DOWN：趋向零方向舍入。向绝对值最小的方向输入，所有的位都要舍弃，不存在进位情况。 　　</li>
+<li>ROUND_CEILING：向正无穷方向舍入。向正最大方向靠拢。若是正数，舍入行为类似于ROUND_UP，若为负数，舍入行为类似于ROUND_DOWN。Math.round()方法就是使用的此模式。</li>
+<li>ROUND_FLOOR：向负无穷方向舍入。向负无穷方向靠拢。若是正数，舍入行为类似于ROUND_DOWN；若为负数，舍入行为类似于ROUND_UP。</li>
+<li>HALF_UP：最近数字舍入(5进)。这是我们最经典的四舍五入。</li>
+<li>HALF_DOWN：最近数字舍入(5舍)。在这里5是要舍弃的。</li>
+<li>HAIL_EVEN：银行家舍入法。<h3 id="BigDecimal"><a href="#BigDecimal" class="headerlink" title="BigDecimal"></a>BigDecimal</h3>&nbsp;&nbsp;&nbsp;&nbsp;BigDecimal是Java提供的一个不变的、任意精度的有符号十进制数对象。它提供了四个构造器，有两个是用BigInteger构造，在这里我们不关心，我们重点看用double和String构造的两个构造器（有关BigInteger详细介绍请查阅j2se API文档）。BigDecimal(double)是把一个double类型十进制数构造为一个BigDecimal对象实例。<br>BigDecimal(String)是把一个以String表示的BigDecimal对象构造为BigDecimal对象实例。习惯上，对于浮点数我们都会定义为double或float，但BigDecimal API文档中对于BigDecimal(double)有这么一段话：<br>Note: the results of this constructor can be somewhat unpredictable. One might assume that new BigDecimal(.1) is exactly equal to .1, but it is actually equal to .10000000000000000555111512312578 27021181583404541015625. This is so because .1 cannot be represented exactly as a double (or, for that matter, as a binary fraction of any finite length). Thus, the long value that is being passed in to the constructor is not exactly equal to .1, appearances notwithstanding.<br>The (String) constructor, on the other hand, is perfectly predictable: new BigDecimal(“.1”) is exactly equal to .1, as one would expect. Therefore, it is generally recommended that the (String) constructor be used in preference to this one<br>下面对这段话做简单解释：<br>注意：这个构造器的结果可能会有不可预知的结果。有人可能设想new BigDecimal(.1)等于.1是正确的，<br>但它实际上是等于.1000000000000000055511151231257827021181583404541015625，这就是为什么.1不能用一个double精确表示的原因，因此，这个被放进构造器中的长值并不精确的等于.1，尽管外观看起来是相等的。<br>然而（String）构造器，则完全可预知的，newBigDecimal(“.1”)如同期望的那样精确的等于.1，因此，（String）构造器是被优先推荐使用的。<br>看下面的结果：<br>   System.out.println(new BigDecimal(123456789.02).toString());<br>   System.out.println(new BigDecimal(“123456789.02”).toString());<br>输出为：</li>
+<li>01999999582767486572265625</li>
+<li>02<br>现在我们知道，如果需要精确计算，非要用String来够造BigDecimal不可！<br>常用BigDecimal与RoundingMode结合使用，如：<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">       BigDecimal storeMoney = <span class="keyword">new</span> BigDecimal(<span class="string">"100000.00"</span>);<span class="comment">//存入金额</span></span><br><span class="line">       BigDecimal newInterest = <span class="keyword">new</span> BigDecimal(<span class="string">"0.002512353"</span>);<span class="comment">//月利率</span></span><br><span class="line">       System.out.println(<span class="string">"利息："</span> + storeMoney.multiply(newInterest).setScale(<span class="number">2</span>, RoundingMode.HALF_EVEN));<span class="comment">//银行家舍入法,保留2位小数</span></span><br><span class="line"></span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/四舍五入/" rel="tag"># 四舍五入</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/05/11/nginx安装.html" rel="prev" title="Nginx的安装">
+                Nginx的安装 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">yeanson</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Math类的四舍五入函数"><span class="nav-number">1.</span> <span class="nav-text">Math类的四舍五入函数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Math-round"><span class="nav-number">1.1.</span> <span class="nav-text">Math.round()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Math-floor"><span class="nav-number">1.2.</span> <span class="nav-text">Math.floor()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Math-ceil"><span class="nav-number">1.3.</span> <span class="nav-text">Math.ceil()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#四舍五入的同时保留有效位数"><span class="nav-number">1.4.</span> <span class="nav-text">四舍五入的同时保留有效位数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#float-double精度误差"><span class="nav-number">1.5.</span> <span class="nav-text">float/double精度误差</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#BigDecimal与RoundingMode"><span class="nav-number">2.</span> <span class="nav-text">BigDecimal与RoundingMode</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#RoundingMode"><span class="nav-number">2.1.</span> <span class="nav-text">RoundingMode</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#BigDecimal"><span class="nav-number">2.2.</span> <span class="nav-text">BigDecimal</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">yeanson</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+</body>
+</html>

@@ -1,0 +1,1251 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+  
+  
+  <link rel="stylesheet" media="all" href="/lib/Han/dist/han.min.css?v=3.3">
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="缓存,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="memcached常用命令memcached交互协议主要有文本协议和二进制协议，其中二进制协议会比文本协议略快。文本协议主要包含在执行item的命令过程中，其中item命令有两行，第一行:$$\langle command name \rangle  \langle key \rangle   \langle flags \rangle  \langle exptime  \rangle  \la">
+<meta name="keywords" content="缓存">
+<meta property="og:type" content="article">
+<meta property="og:title" content="memcached常用命令">
+<meta property="og:url" content="http:blog.plaxj.com/2018/05/02/缓存之memcached-常用命令.html">
+<meta property="og:site_name" content="Yeanson&#39;s blog">
+<meta property="og:description" content="memcached常用命令memcached交互协议主要有文本协议和二进制协议，其中二进制协议会比文本协议略快。文本协议主要包含在执行item的命令过程中，其中item命令有两行，第一行:$$\langle command name \rangle  \langle key \rangle   \langle flags \rangle  \langle exptime  \rangle  \la">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-07-24T13:33:22.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="memcached常用命令">
+<meta name="twitter:description" content="memcached常用命令memcached交互协议主要有文本协议和二进制协议，其中二进制协议会比文本协议略快。文本协议主要包含在执行item的命令过程中，其中item命令有两行，第一行:$$\langle command name \rangle  \langle key \rangle   \langle flags \rangle  \langle exptime  \rangle  \la">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http:blog.plaxj.com/2018/05/02/缓存之memcached-常用命令.html">
+
+
+
+
+
+  <title>memcached常用命令 | Yeanson's blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Yeanson's blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http:blog.plaxj.com/2018/05/02/缓存之memcached-常用命令.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="yeanson">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Yeanson's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">memcached常用命令</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-02T00:00:00+08:00">
+                2018-05-02
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/缓存/" itemprop="url" rel="index">
+                    <span itemprop="name">缓存</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/缓存/memcached/" itemprop="url" rel="index">
+                    <span itemprop="name">memcached</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body han-init-context" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="memcached常用命令"><a href="#memcached常用命令" class="headerlink" title="memcached常用命令"></a>memcached常用命令</h2><p>memcached交互协议主要有文本协议和二进制协议，其中二进制协议会比文本协议略快。文本协议主要包含在执行item的命令过程中，其中item命令有两行，第一行:$$\langle command name \rangle  \langle key \rangle   \langle flags \rangle  \langle exptime  \rangle  \langle bytes \rangle $$</p>
+<a id="more"></a>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">command name:如 set add replace等</span><br><span class="line">key:唯一标识</span><br><span class="line">flags:32位的标志值，存储关于键值对的额外信息</span><br><span class="line">exptime:键值对缓存时间，单位为秒，0为永久（实际最多30天）</span><br><span class="line">bytes:数据大小</span><br></pre></td></tr></table></figure>
+
+<p>第二行：value，存储的值<br>常用命令包括数据存储、读取等命令：</p>
+<h3 id="数据存储"><a href="#数据存储" class="headerlink" title="数据存储"></a>数据存储</h3><h4 id="set-数据存在时更新，数据不存在存储"><a href="#set-数据存在时更新，数据不存在存储" class="headerlink" title="set:数据存在时更新，数据不存在存储"></a>set:数据存在时更新，数据不存在存储</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">#连接到memcached服务端</span><br><span class="line">telnet 192.168.1.4 11211</span><br><span class="line"></span><br><span class="line">#存储数据，永不失效</span><br><span class="line">set key1 0 0 4</span><br><span class="line">test</span><br><span class="line">STORED</span><br><span class="line"></span><br><span class="line">set key1 0 0 5</span><br><span class="line">test1</span><br><span class="line">STORED</span><br><span class="line"></span><br><span class="line">set key1 0 0 4</span><br><span class="line">test2</span><br><span class="line">ERROR</span><br><span class="line"></span><br><span class="line">#指定失效时间:10s</span><br><span class="line">set price 0 10 4</span><br><span class="line">51.5</span><br><span class="line"></span><br><span class="line">get price</span><br><span class="line">END#超过10s，存储的数据没了</span><br></pre></td></tr></table></figure>
+
+<h4 id="add-当数据不存在时存储"><a href="#add-当数据不存在时存储" class="headerlink" title="add:当数据不存在时存储"></a>add:当数据不存在时存储</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">add name 0 0 10</span><br><span class="line">zhangsan </span><br><span class="line">STORED</span><br><span class="line"></span><br><span class="line">add name 0 0 10</span><br><span class="line">lisi</span><br><span class="line">NOT_STORED</span><br><span class="line"></span><br><span class="line">get name </span><br><span class="line">VALUE name 0 10</span><br><span class="line">zhangsan</span><br><span class="line">END</span><br></pre></td></tr></table></figure>
+
+<h4 id="replace-当数据存在时替换之前的数据存储"><a href="#replace-当数据存在时替换之前的数据存储" class="headerlink" title="replace:当数据存在时替换之前的数据存储"></a>replace:当数据存在时替换之前的数据存储</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">set address 0 0 100</span><br><span class="line">china sichuan</span><br><span class="line">STORED</span><br><span class="line"></span><br><span class="line">replace address 0 0 100</span><br><span class="line">china chongqing</span><br><span class="line">STORED</span><br><span class="line"></span><br><span class="line">delete address</span><br><span class="line"></span><br><span class="line">replace address 0 0 100</span><br><span class="line">china yunnan</span><br><span class="line">NOT_STORED</span><br></pre></td></tr></table></figure>
+
+<h3 id="数据读取"><a href="#数据读取" class="headerlink" title="数据读取"></a>数据读取</h3><h4 id="get-key可以多个，多个key之间空格"><a href="#get-key可以多个，多个key之间空格" class="headerlink" title="get:key可以多个，多个key之间空格"></a>get:key可以多个，多个key之间空格</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">get key1</span><br><span class="line">VALUE key1 0 5</span><br><span class="line">test1</span><br><span class="line">END</span><br><span class="line"></span><br><span class="line">get key1 name</span><br><span class="line">VALUE key1 0 5</span><br><span class="line">test1</span><br><span class="line">VALUE name 0 10</span><br><span class="line">zhangsan</span><br></pre></td></tr></table></figure>
+
+<h4 id="gets-与get相同，但是会多返回一个数字，判断数据是否被修改过，相当于版本控制"><a href="#gets-与get相同，但是会多返回一个数字，判断数据是否被修改过，相当于版本控制" class="headerlink" title="gets:与get相同，但是会多返回一个数字，判断数据是否被修改过，相当于版本控制"></a>gets:与get相同，但是会多返回一个数字，判断数据是否被修改过，相当于版本控制</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">gets key1</span><br><span class="line">VALUE key1 0 5 4</span><br><span class="line">test1</span><br><span class="line">END</span><br><span class="line"></span><br><span class="line">set key1 0 0 5</span><br><span class="line">plaxj</span><br><span class="line">STORED</span><br><span class="line"></span><br><span class="line">gets key1</span><br><span class="line">VALUE key1 0 5 7</span><br><span class="line">plaxj</span><br><span class="line">END</span><br></pre></td></tr></table></figure>
+
+<h4 id="cas-check-and-set-多线程中的同步操作。主要用于多个客户端同时读取的事后保证原子操作。当最后一个参数与gets返回的数字一致时才存储，否则返回EXISTS。"><a href="#cas-check-and-set-多线程中的同步操作。主要用于多个客户端同时读取的事后保证原子操作。当最后一个参数与gets返回的数字一致时才存储，否则返回EXISTS。" class="headerlink" title="cas:check and set 多线程中的同步操作。主要用于多个客户端同时读取的事后保证原子操作。当最后一个参数与gets返回的数字一致时才存储，否则返回EXISTS。"></a>cas:check and set 多线程中的同步操作。主要用于多个客户端同时读取的事后保证原子操作。当最后一个参数与gets返回的数字一致时才存储，否则返回EXISTS。</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">gets key1    </span><br><span class="line">VALUE key1 0 5 7</span><br><span class="line">plaxj</span><br><span class="line">END</span><br><span class="line">cas key1 0 0 5 5 6 </span><br><span class="line">CLIENT_ERROR bad data chunk</span><br><span class="line">ERROR</span><br><span class="line"></span><br><span class="line">gets key1</span><br><span class="line">VALUE key1 0 5 8</span><br><span class="line">plaxj</span><br><span class="line">END</span><br><span class="line">cas key1 0 0 5 8</span><br><span class="line">test1</span><br><span class="line">STORED</span><br><span class="line">get key1</span><br><span class="line">VALUE key1 0 5</span><br><span class="line">test1</span><br><span class="line">END</span><br></pre></td></tr></table></figure>
+
+<h3 id="数字的加减"><a href="#数字的加减" class="headerlink" title="数字的加减"></a>数字的加减</h3><h4 id="incr-增加"><a href="#incr-增加" class="headerlink" title="incr:增加"></a>incr:增加</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">set price 0 180 4 </span><br><span class="line">20</span><br><span class="line"></span><br><span class="line">STORED</span><br><span class="line">incr price 10</span><br><span class="line">30</span><br><span class="line">get price</span><br><span class="line">VALUE price 0 4</span><br><span class="line">30  </span><br><span class="line">END</span><br></pre></td></tr></table></figure>
+
+<h4 id="decr-减少"><a href="#decr-减少" class="headerlink" title="decr:减少"></a>decr:减少</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">get price</span><br><span class="line">VALUE price 0 4</span><br><span class="line">30  </span><br><span class="line">END</span><br><span class="line">decr price 5</span><br><span class="line">25</span><br><span class="line">get price</span><br><span class="line">VALUE price 0 4</span><br><span class="line">25  </span><br><span class="line">END</span><br></pre></td></tr></table></figure>
+
+<h3 id="追加与清除命令"><a href="#追加与清除命令" class="headerlink" title="追加与清除命令"></a>追加与清除命令</h3><h4 id="append-追加到已经存在的数据之后，当存在时才会存储"><a href="#append-追加到已经存在的数据之后，当存在时才会存储" class="headerlink" title="append:追加到已经存在的数据之后，当存在时才会存储"></a>append:追加到已经存在的数据之后，当存在时才会存储</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">get key1</span><br><span class="line">VALUE key1 0 5</span><br><span class="line">test1</span><br><span class="line">END</span><br><span class="line">append key1 0 0 5</span><br><span class="line">plaxj</span><br><span class="line">STORED</span><br><span class="line">get key1</span><br><span class="line">VALUE key1 0 10</span><br><span class="line">test1plaxj</span><br><span class="line">END</span><br><span class="line"></span><br><span class="line">append key10 0 0 10</span><br><span class="line">11</span><br><span class="line">NOT_STORED</span><br></pre></td></tr></table></figure>
+
+<h4 id="prepend-追加到已经存在的数据之前，当存在时才会存储"><a href="#prepend-追加到已经存在的数据之前，当存在时才会存储" class="headerlink" title="prepend:追加到已经存在的数据之前，当存在时才会存储"></a>prepend:追加到已经存在的数据之前，当存在时才会存储</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">get key1</span><br><span class="line">VALUE key1 0 10</span><br><span class="line">test1plaxj</span><br><span class="line">END</span><br><span class="line">prepend key1 0 0 4  </span><br><span class="line">lisi</span><br><span class="line">STORED</span><br><span class="line">get key1</span><br><span class="line">VALUE key1 0 14</span><br><span class="line">lisitest1plaxj</span><br><span class="line">END</span><br><span class="line"></span><br><span class="line">prepend key10 0 0 10</span><br><span class="line">123</span><br><span class="line">NOT_STORED</span><br></pre></td></tr></table></figure>
+
+<h4 id="delete-删除缓存数据，数据存在时，删除成功返回DELETED，不存在时返回NOT-FOUND"><a href="#delete-删除缓存数据，数据存在时，删除成功返回DELETED，不存在时返回NOT-FOUND" class="headerlink" title="delete:删除缓存数据，数据存在时，删除成功返回DELETED，不存在时返回NOT_FOUND"></a>delete:删除缓存数据，数据存在时，删除成功返回DELETED，不存在时返回NOT_FOUND</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">get key1  </span><br><span class="line">VALUE key1 0 14</span><br><span class="line">lisitest1plaxj</span><br><span class="line">END</span><br><span class="line">delete key1</span><br><span class="line">DELETED</span><br><span class="line">get key1</span><br><span class="line">END</span><br><span class="line">delete key10</span><br><span class="line">NOT_FOUND</span><br></pre></td></tr></table></figure>
+
+<h4 id="flush-all-将当前所有缓存数据设置为过期，不释放内存"><a href="#flush-all-将当前所有缓存数据设置为过期，不释放内存" class="headerlink" title="flush_all:将当前所有缓存数据设置为过期，不释放内存."></a>flush_all:将当前所有缓存数据设置为过期，不释放内存.</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">flush_all</span><br><span class="line">OK</span><br><span class="line">get key1</span><br><span class="line">END</span><br></pre></td></tr></table></figure>
+
+<h3 id="其他命令"><a href="#其他命令" class="headerlink" title="其他命令"></a>其他命令</h3><h4 id="stats-返回memcached服务器状态信息"><a href="#stats-返回memcached服务器状态信息" class="headerlink" title="stats:返回memcached服务器状态信息"></a>stats:返回memcached服务器状态信息</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br></pre></td><td class="code"><pre><span class="line">stats</span><br><span class="line">STAT pid 7161</span><br><span class="line">STAT uptime 362695</span><br><span class="line">STAT time 1481369769</span><br><span class="line">STAT version 1.4.33</span><br><span class="line">STAT libevent 2.0.22-stable</span><br><span class="line">STAT pointer_size 64</span><br><span class="line">STAT rusage_user 76.234473</span><br><span class="line">STAT rusage_system 114.678044</span><br><span class="line">STAT curr_connections 10</span><br><span class="line">STAT total_connections 16</span><br><span class="line">STAT connection_structures 11</span><br><span class="line">STAT reserved_fds 20</span><br><span class="line">STAT cmd_get 30</span><br><span class="line">STAT cmd_set 19</span><br><span class="line">STAT cmd_flush 1</span><br><span class="line">STAT cmd_touch 0</span><br><span class="line">STAT get_hits 22</span><br><span class="line">STAT get_misses 8</span><br><span class="line">STAT get_expired 1</span><br><span class="line">STAT get_flushed 0</span><br><span class="line">STAT delete_misses 1</span><br><span class="line">STAT delete_hits 3</span><br><span class="line">STAT incr_misses 0</span><br><span class="line">STAT incr_hits 0</span><br><span class="line">STAT decr_misses 0</span><br><span class="line">STAT decr_hits 0</span><br><span class="line">STAT cas_misses 0</span><br><span class="line">STAT cas_hits 2</span><br><span class="line">STAT cas_badval 0</span><br><span class="line">STAT touch_hits 0</span><br><span class="line">STAT touch_misses 0</span><br><span class="line">STAT auth_cmds 0</span><br><span class="line">STAT auth_errors 0</span><br><span class="line">STAT bytes_read 1188</span><br><span class="line">STAT bytes_written 1177</span><br><span class="line">STAT limit_maxbytes 67108864</span><br><span class="line">STAT accepting_conns 1</span><br><span class="line">STAT listen_disabled_num 0</span><br><span class="line">STAT time_in_listen_disabled_us 0</span><br><span class="line">STAT threads 4</span><br><span class="line">STAT conn_yields 0</span><br><span class="line">STAT hash_power_level 16</span><br><span class="line">STAT hash_bytes 524288</span><br><span class="line">STAT hash_is_expanding 0</span><br><span class="line">STAT malloc_fails 0</span><br><span class="line">STAT log_worker_dropped 0</span><br><span class="line">STAT log_worker_written 0</span><br><span class="line">STAT log_watcher_skipped 0</span><br><span class="line">STAT log_watcher_sent 0</span><br><span class="line">STAT bytes 80</span><br><span class="line">STAT curr_items 1</span><br><span class="line">STAT total_items 11</span><br><span class="line">STAT expired_unfetched 0</span><br><span class="line">STAT evicted_unfetched 0</span><br><span class="line">STAT evictions 0</span><br><span class="line">STAT reclaimed 0</span><br><span class="line">STAT crawler_reclaimed 0</span><br><span class="line">STAT crawler_items_checked 0</span><br><span class="line">STAT lrutail_reflocked 0</span><br><span class="line">END</span><br></pre></td></tr></table></figure>
+
+<p>返回的字段中部分解释:</p>
+<table>
+<thead>
+<tr>
+<th align="center">名称</th>
+<th align="center">含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">pid</td>
+<td align="center">server端的pid</td>
+</tr>
+<tr>
+<td align="center">uptime</td>
+<td align="center">自启动到现在的时间(秒)</td>
+</tr>
+<tr>
+<td align="center">time</td>
+<td align="center">当前服务器时间</td>
+</tr>
+<tr>
+<td align="center">version</td>
+<td align="center">版本号</td>
+</tr>
+<tr>
+<td align="center">libevent</td>
+<td align="center">当前memcached服务器依赖的libevent版本</td>
+</tr>
+<tr>
+<td align="center">pointer_size</td>
+<td align="center">指针大小</td>
+</tr>
+<tr>
+<td align="center">curr_items</td>
+<td align="center">当前已经存储的item数目</td>
+</tr>
+<tr>
+<td align="center">rusage_user</td>
+<td align="center">该进程累计的用户时间，单位：秒</td>
+</tr>
+<tr>
+<td align="center">rusage_system</td>
+<td align="center">该进程累计的系统时间，单位：秒</td>
+</tr>
+<tr>
+<td align="center">curr_items</td>
+<td align="center">Memcached 当前存储的内容数量</td>
+</tr>
+<tr>
+<td align="center">total_items</td>
+<td align="center">服务端从启动到现在总共存储的item数量</td>
+</tr>
+<tr>
+<td align="center">bytes</td>
+<td align="center">存储item花费的内存大小</td>
+</tr>
+<tr>
+<td align="center">curr_connections</td>
+<td align="center">当前客户端连接数量</td>
+</tr>
+<tr>
+<td align="center">total_connections</td>
+<td align="center">服务端从启动到现在总共的连接数</td>
+</tr>
+<tr>
+<td align="center">connection_structures</td>
+<td align="center">分配的链接数</td>
+</tr>
+<tr>
+<td align="center">cmd_get</td>
+<td align="center">get次数</td>
+</tr>
+<tr>
+<td align="center">cmd_set</td>
+<td align="center">set的次数</td>
+</tr>
+<tr>
+<td align="center">get_his</td>
+<td align="center">get命中次数</td>
+</tr>
+<tr>
+<td align="center">get_misses</td>
+<td align="center">get未命中次数</td>
+</tr>
+<tr>
+<td align="center">evictions</td>
+<td align="center">为新的item释放内存空间而被移除的有效item的数目。如果cache的size比较小，则淘汰策略经常发生</td>
+</tr>
+<tr>
+<td align="center">bytes_read</td>
+<td align="center">从cache中读取的总字节数</td>
+</tr>
+<tr>
+<td align="center">bytes_written</td>
+<td align="center">写入cache的总字节数</td>
+</tr>
+<tr>
+<td align="center">limit_maxbytes</td>
+<td align="center">server分配的最大内存数量</td>
+</tr>
+</tbody></table>
+<h4 id="stats-items-查看items行"><a href="#stats-items-查看items行" class="headerlink" title="stats items:查看items行"></a>stats items:查看items行</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">stats items</span><br><span class="line">STAT items:1:number 1</span><br><span class="line">STAT items:1:age 2537</span><br><span class="line">STAT items:1:evicted 0</span><br><span class="line">STAT items:1:evicted_nonzero 0</span><br><span class="line">STAT items:1:evicted_time 0</span><br><span class="line">STAT items:1:outofmemory 0</span><br><span class="line">STAT items:1:tailrepairs 0</span><br><span class="line">STAT items:1:reclaimed 0</span><br><span class="line">STAT items:1:expired_unfetched 0</span><br><span class="line">STAT items:1:evicted_unfetched 0</span><br><span class="line">STAT items:1:crawler_reclaimed 0</span><br><span class="line">STAT items:1:crawler_items_checked 0</span><br><span class="line">STAT items:1:lrutail_reflocked 0</span><br><span class="line">END</span><br></pre></td></tr></table></figure>
+
+<h4 id="stats-cachedump-slabs-id-limit-num和上面的stats-items结合查看具体的item命令"><a href="#stats-cachedump-slabs-id-limit-num和上面的stats-items结合查看具体的item命令" class="headerlink" title="stats cachedump slabs_id limit_num和上面的stats items结合查看具体的item命令:"></a>stats cachedump slabs_id limit_num和上面的stats items结合查看具体的item命令:</h4><p>slabs_id:上面stats items返回的STAT items后面的数字<br>limit_num:返回几条记录，0:所有记录</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">stats cachedump 1 0</span><br><span class="line">ITEM name [10 b; 0 s]</span><br><span class="line">END</span><br></pre></td></tr></table></figure>
+
+<h4 id="stats-slabs-返回各个slab的信息-chunk的大小、数目、使用情况"><a href="#stats-slabs-返回各个slab的信息-chunk的大小、数目、使用情况" class="headerlink" title="stats slabs:返回各个slab的信息:chunk的大小、数目、使用情况"></a>stats slabs:返回各个slab的信息:chunk的大小、数目、使用情况</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line">STAT 1:chunk_size 96</span><br><span class="line">STAT 1:chunks_per_page 10922</span><br><span class="line">STAT 1:total_pages 1</span><br><span class="line">STAT 1:total_chunks 10922</span><br><span class="line">STAT 1:used_chunks 1</span><br><span class="line">STAT 1:free_chunks 10921</span><br><span class="line">STAT 1:free_chunks_end 0</span><br><span class="line">STAT 1:mem_requested 80</span><br><span class="line">STAT 1:get_hits 20</span><br><span class="line">STAT 1:cmd_set 17</span><br><span class="line">STAT 1:delete_hits 1</span><br><span class="line">STAT 1:incr_hits 0</span><br><span class="line">STAT 1:decr_hits 0</span><br><span class="line">STAT 1:cas_hits 2</span><br><span class="line">STAT 1:cas_badval 0</span><br><span class="line">STAT 1:touch_hits 0</span><br><span class="line">STAT 2:chunk_size 120</span><br><span class="line">STAT 2:chunks_per_page 8738</span><br><span class="line">STAT 2:total_pages 1</span><br><span class="line">STAT 2:total_chunks 8738</span><br><span class="line">STAT 2:used_chunks 0</span><br><span class="line">STAT 2:free_chunks 8738</span><br><span class="line">STAT 2:free_chunks_end 0</span><br><span class="line">STAT 2:mem_requested 0</span><br><span class="line">STAT 2:get_hits 2</span><br><span class="line">STAT 2:cmd_set 2</span><br><span class="line">STAT 2:delete_hits 2</span><br><span class="line">STAT 2:incr_hits 0</span><br><span class="line">STAT 2:decr_hits 0</span><br><span class="line">STAT 2:cas_hits 0</span><br><span class="line">STAT 2:cas_badval 0</span><br><span class="line">STAT 2:touch_hits 0</span><br><span class="line">STAT 4:chunk_size 192</span><br><span class="line">STAT 4:chunks_per_page 5461</span><br><span class="line">STAT 4:total_pages 1</span><br><span class="line">STAT 4:total_chunks 5461</span><br><span class="line">STAT 4:used_chunks 0</span><br><span class="line">STAT 4:free_chunks 5461</span><br><span class="line">STAT 4:free_chunks_end 0</span><br><span class="line">STAT 4:mem_requested 0</span><br><span class="line">STAT 4:get_hits 0</span><br><span class="line">STAT 4:cmd_set 0</span><br><span class="line">STAT 4:delete_hits 0</span><br><span class="line">STAT 4:incr_hits 0</span><br><span class="line">STAT 4:decr_hits 0</span><br><span class="line">STAT 4:cas_hits 0</span><br><span class="line">STAT 4:cas_badval 0</span><br><span class="line">STAT 4:touch_hits 0</span><br><span class="line">STAT active_slabs 3</span><br><span class="line">STAT total_malloced 3145584</span><br><span class="line">END</span><br></pre></td></tr></table></figure>
+
+<h4 id="stats-sizes-所有的item的大小和个数"><a href="#stats-sizes-所有的item的大小和个数" class="headerlink" title="stats sizes:所有的item的大小和个数"></a>stats sizes:所有的item的大小和个数</h4><h4 id="stats-reset-清空所有统计数据"><a href="#stats-reset-清空所有统计数据" class="headerlink" title="stats reset 清空所有统计数据"></a>stats reset 清空所有统计数据</h4><p>stats系列命令能够为我们清晰的提供的memcached服务器的运行状态，我们可以通过这些命令组合去监控分布式memcached服务器的运行情况，及时的处理问题和提出需要优化的地方等。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/缓存/" rel="tag"># 缓存</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/05/01/缓存之memcached-安装和基本配置.html" rel="next" title="缓存之memcached-安装和基本配置">
+                <i class="fa fa-chevron-left"></i> 缓存之memcached-安装和基本配置
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/05/03/缓存之memcached-memcached的java客户端开发.html" rel="prev" title="memcached的分布式算法以及java客户端的开发">
+                memcached的分布式算法以及java客户端的开发 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">yeanson</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#memcached常用命令"><span class="nav-number">1.</span> <span class="nav-text">memcached常用命令</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#数据存储"><span class="nav-number">1.1.</span> <span class="nav-text">数据存储</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#set-数据存在时更新，数据不存在存储"><span class="nav-number">1.1.1.</span> <span class="nav-text">set:数据存在时更新，数据不存在存储</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#add-当数据不存在时存储"><span class="nav-number">1.1.2.</span> <span class="nav-text">add:当数据不存在时存储</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#replace-当数据存在时替换之前的数据存储"><span class="nav-number">1.1.3.</span> <span class="nav-text">replace:当数据存在时替换之前的数据存储</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数据读取"><span class="nav-number">1.2.</span> <span class="nav-text">数据读取</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#get-key可以多个，多个key之间空格"><span class="nav-number">1.2.1.</span> <span class="nav-text">get:key可以多个，多个key之间空格</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#gets-与get相同，但是会多返回一个数字，判断数据是否被修改过，相当于版本控制"><span class="nav-number">1.2.2.</span> <span class="nav-text">gets:与get相同，但是会多返回一个数字，判断数据是否被修改过，相当于版本控制</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#cas-check-and-set-多线程中的同步操作。主要用于多个客户端同时读取的事后保证原子操作。当最后一个参数与gets返回的数字一致时才存储，否则返回EXISTS。"><span class="nav-number">1.2.3.</span> <span class="nav-text">cas:check and set 多线程中的同步操作。主要用于多个客户端同时读取的事后保证原子操作。当最后一个参数与gets返回的数字一致时才存储，否则返回EXISTS。</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数字的加减"><span class="nav-number">1.3.</span> <span class="nav-text">数字的加减</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#incr-增加"><span class="nav-number">1.3.1.</span> <span class="nav-text">incr:增加</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#decr-减少"><span class="nav-number">1.3.2.</span> <span class="nav-text">decr:减少</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#追加与清除命令"><span class="nav-number">1.4.</span> <span class="nav-text">追加与清除命令</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#append-追加到已经存在的数据之后，当存在时才会存储"><span class="nav-number">1.4.1.</span> <span class="nav-text">append:追加到已经存在的数据之后，当存在时才会存储</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#prepend-追加到已经存在的数据之前，当存在时才会存储"><span class="nav-number">1.4.2.</span> <span class="nav-text">prepend:追加到已经存在的数据之前，当存在时才会存储</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#delete-删除缓存数据，数据存在时，删除成功返回DELETED，不存在时返回NOT-FOUND"><span class="nav-number">1.4.3.</span> <span class="nav-text">delete:删除缓存数据，数据存在时，删除成功返回DELETED，不存在时返回NOT_FOUND</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#flush-all-将当前所有缓存数据设置为过期，不释放内存"><span class="nav-number">1.4.4.</span> <span class="nav-text">flush_all:将当前所有缓存数据设置为过期，不释放内存.</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#其他命令"><span class="nav-number">1.5.</span> <span class="nav-text">其他命令</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#stats-返回memcached服务器状态信息"><span class="nav-number">1.5.1.</span> <span class="nav-text">stats:返回memcached服务器状态信息</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#stats-items-查看items行"><span class="nav-number">1.5.2.</span> <span class="nav-text">stats items:查看items行</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#stats-cachedump-slabs-id-limit-num和上面的stats-items结合查看具体的item命令"><span class="nav-number">1.5.3.</span> <span class="nav-text">stats cachedump slabs_id limit_num和上面的stats items结合查看具体的item命令:</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#stats-slabs-返回各个slab的信息-chunk的大小、数目、使用情况"><span class="nav-number">1.5.4.</span> <span class="nav-text">stats slabs:返回各个slab的信息:chunk的大小、数目、使用情况</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#stats-sizes-所有的item的大小和个数"><span class="nav-number">1.5.5.</span> <span class="nav-text">stats sizes:所有的item的大小和个数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#stats-reset-清空所有统计数据"><span class="nav-number">1.5.6.</span> <span class="nav-text">stats reset 清空所有统计数据</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">yeanson</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+</body>
+</html>

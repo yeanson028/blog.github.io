@@ -1,0 +1,1832 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+  
+  
+  <link rel="stylesheet" media="all" href="/lib/Han/dist/han.min.css?v=3.3">
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="IDEA,IDEA优化,IDEA快捷键,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="&amp;emsp;&amp;emsp;idea现在已经成了java开发标配的ide，idea默认安装之后其默认的参数已经能够应对日常的大部分开发。这里主要记录下自己对此工具的一些参数的调整，以及快捷键的整理，提升自己编码效率(后续操作都是在mac下)。">
+<meta name="keywords" content="IDEA,IDEA优化,IDEA快捷键">
+<meta property="og:type" content="article">
+<meta property="og:title" content="IDEA设置优化提高编程效率">
+<meta property="og:url" content="http:blog.plaxj.com/2019/03/07/IDEA设置优化提高编程效率.html">
+<meta property="og:site_name" content="Yeanson&#39;s blog">
+<meta property="og:description" content="&amp;emsp;&amp;emsp;idea现在已经成了java开发标配的ide，idea默认安装之后其默认的参数已经能够应对日常的大部分开发。这里主要记录下自己对此工具的一些参数的调整，以及快捷键的整理，提升自己编码效率(后续操作都是在mac下)。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http:/images/1563260823305.png">
+<meta property="og:updated_time" content="2020-05-08T14:12:20.763Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="IDEA设置优化提高编程效率">
+<meta name="twitter:description" content="&amp;emsp;&amp;emsp;idea现在已经成了java开发标配的ide，idea默认安装之后其默认的参数已经能够应对日常的大部分开发。这里主要记录下自己对此工具的一些参数的调整，以及快捷键的整理，提升自己编码效率(后续操作都是在mac下)。">
+<meta name="twitter:image" content="http:/images/1563260823305.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http:blog.plaxj.com/2019/03/07/IDEA设置优化提高编程效率.html">
+
+
+
+
+
+  <title>IDEA设置优化提高编程效率 | Yeanson's blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Yeanson's blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http:blog.plaxj.com/2019/03/07/IDEA设置优化提高编程效率.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="yeanson">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Yeanson's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">IDEA设置优化提高编程效率</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-03-07T11:22:43+08:00">
+                2019-03-07
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/常用工具/" itemprop="url" rel="index">
+                    <span itemprop="name">常用工具</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/常用工具/IDEA/" itemprop="url" rel="index">
+                    <span itemprop="name">IDEA</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body han-init-context" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>&emsp;&emsp;idea现在已经成了java开发标配的ide，idea默认安装之后其默认的参数已经能够应对日常的大部分开发。这里主要记录下自己对此工具的一些参数的调整，以及快捷键的整理，提升自己编码效率(后续操作都是在mac下)。</p>
+<a id="more"></a>
+
+<h1 id="常用参数设置"><a href="#常用参数设置" class="headerlink" title="常用参数设置"></a>常用参数设置</h1><h2 id="GC算法堆内存修改"><a href="#GC算法堆内存修改" class="headerlink" title="GC算法堆内存修改"></a>GC算法堆内存修改</h2><p>IDEA默认安装之后采用的是CMS的GC算法，修改为G1算法，同一个配置文件中顺便修改堆内存大小,配置文件为bin/idea.vmoptions，修改如下参数:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">##设置堆内存大小，xms和xmx尽量设置同样大小</span><br><span class="line">-Xms1024m</span><br><span class="line">-Xmx1024m</span><br><span class="line">-XX:ReservedCodeCacheSize=240m</span><br><span class="line">-XX:+UseCompressedOops</span><br><span class="line">##解决windows下console中文乱码问题</span><br><span class="line">-Dfile.encoding=UTF-8</span><br><span class="line">## 修改gc算法</span><br><span class="line">-XX:+UseG1GC</span><br><span class="line">-XX:SoftRefLRUPolicyMSPerMB=50</span><br><span class="line">-ea</span><br><span class="line">-Dsun.io.useCanonCaches=false</span><br><span class="line">-Djava.net.preferIPv4Stack=true</span><br><span class="line">-Djdk.http.auth.tunneling.disabledSchemes=&quot;&quot;</span><br><span class="line">-XX:+HeapDumpOnOutOfMemoryError</span><br><span class="line">-XX:-OmitStackTraceInFastThrow</span><br><span class="line">-Xverify:none</span><br><span class="line"></span><br><span class="line">-XX:ErrorFile=$USER_HOME/java_error_in_idea_%p.log</span><br><span class="line">-XX:HeapDumpPath=$USER_HOME/java_error_in_idea.hprof</span><br></pre></td></tr></table></figure>
+
+<h2 id="常用配置修改"><a href="#常用配置修改" class="headerlink" title="常用配置修改"></a>常用配置修改</h2><ol>
+<li>自动编译</li>
+</ol>
+<blockquote>
+<p>File | Settings | Build, Execution, Deployment | Compiler<br>勾选 Build project automatically</p>
+</blockquote>
+<ol start="2">
+<li>忽略大小写开关(此开关不打开的话会导致某个关键词因为大小写而不智能提示)</li>
+</ol>
+<blockquote>
+<p>File | Settings | Editor | General | Code Completion<br>Match Case 勾选框取消</p>
+</blockquote>
+<ol start="3">
+<li>悬浮提示(此设置可以使鼠标悬停的方法名给出jdoc)</li>
+</ol>
+<blockquote>
+<p>File | Settings | Editor | General<br>勾选 Show quick documentation on mouse move</p>
+</blockquote>
+<ol start="4">
+<li>自动导入包去除 * 号</li>
+</ol>
+<blockquote>
+<p>File | Settings | Editor | Code Style | Java &gt; imports<br>Class count to user import with * 数字改大一点</p>
+</blockquote>
+<h2 id="Live-Template设置"><a href="#Live-Template设置" class="headerlink" title="Live Template设置"></a>Live Template设置</h2><h3 id="利用Live-Template设置自己的注释"><a href="#利用Live-Template设置自己的注释" class="headerlink" title="利用Live Template设置自己的注释"></a>利用Live Template设置自己的注释</h3><p>比如公司有自己的方法类的注释规范，平时自己写代码的注释格式，可以使用Live Template设置不同的注释，</p>
+<p>设置方法：</p>
+<p>Settings&gt;Editor&gt;Live Templates:</p>
+<p><img src="/images/1563260823305.png" alt="LiveTemplates"></p>
+<p>点击右上角+号，新增Template Group，取名注释，再次点击+号，新增Live Template:</p>
+<h1 id="常用快捷键"><a href="#常用快捷键" class="headerlink" title="常用快捷键"></a>常用快捷键</h1><h2 id="Command"><a href="#Command" class="headerlink" title="Command"></a>Command</h2><table>
+<thead>
+<tr>
+<th>快捷键</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Command+F</td>
+<td>在当前文件进行文本查找</td>
+</tr>
+<tr>
+<td>Command+R</td>
+<td>在当前文件进行文本替换</td>
+</tr>
+<tr>
+<td>Command+Z</td>
+<td>撤销</td>
+</tr>
+<tr>
+<td>Command+Y</td>
+<td>删除光标所在行或者删除选中的行</td>
+</tr>
+<tr>
+<td>Command+X</td>
+<td>剪切光标所在行 或 剪切选择内容</td>
+</tr>
+<tr>
+<td>Command+C</td>
+<td>复制光标所在行 或 复制选择内容</td>
+</tr>
+<tr>
+<td>Command+D</td>
+<td>复制光标所在行 或 复制选择内容，并把复制内容插入光标位置下面</td>
+</tr>
+<tr>
+<td>Command+W</td>
+<td>递进式选择代码块。可选中光标所在的单词或段落，连续按会在原有选中的基础上再扩展选中范围</td>
+</tr>
+<tr>
+<td>Command+E</td>
+<td>显示最近打开的文件记录列表</td>
+</tr>
+<tr>
+<td>Command+N</td>
+<td>根据输入的类名查找类文件</td>
+</tr>
+<tr>
+<td>Command+G</td>
+<td>在当前文件跳转到指定处</td>
+</tr>
+<tr>
+<td>Command+J</td>
+<td>插入自定义动态代码模板</td>
+</tr>
+<tr>
+<td>Command+P</td>
+<td>方法参数提示</td>
+</tr>
+<tr>
+<td>Command+Q</td>
+<td>光标所在的变量/类名/方法名等上面（也可以在提示补充的时候按），显示文档内容</td>
+</tr>
+<tr>
+<td>Command+U</td>
+<td>前往当前光标所在的方法的父类的方法/接口的定义</td>
+</tr>
+<tr>
+<td>Command+B</td>
+<td>进入光标所在的方法/变量的接口或是定义出，等效于Command+左键单击</td>
+</tr>
+<tr>
+<td>Command+K</td>
+<td>版本控制提交项目，需要此项目有加入到版本控制才可用</td>
+</tr>
+<tr>
+<td>Command+T</td>
+<td>版本控制更新项目，需要此项目有加入到版本控制才可用</td>
+</tr>
+<tr>
+<td>Command+H</td>
+<td>显示当前类的层次结构</td>
+</tr>
+<tr>
+<td>Command+O</td>
+<td>选择可重写的方法</td>
+</tr>
+<tr>
+<td>Command+I</td>
+<td>选择可继承的方法</td>
+</tr>
+<tr>
+<td>Command+ +</td>
+<td>展开代码</td>
+</tr>
+<tr>
+<td>Command+ -</td>
+<td>折叠代码</td>
+</tr>
+<tr>
+<td>Command+/</td>
+<td>注释光标所在行代码，会根据当前不同文件类型使用不同的注释符号</td>
+</tr>
+<tr>
+<td>Command+[</td>
+<td>移动光标到当前所在代码的花括号开始位置</td>
+</tr>
+<tr>
+<td>Command+]</td>
+<td>移动光标到当前所在代码的花括号结束位置</td>
+</tr>
+<tr>
+<td>Command+F1</td>
+<td>在光标所在的错误代码处显示错误信息</td>
+</tr>
+<tr>
+<td>Command+F3</td>
+<td>跳转到所选中的词的下一个引用位置</td>
+</tr>
+<tr>
+<td>Command+F4</td>
+<td>关闭当前编辑文件</td>
+</tr>
+<tr>
+<td>Command+F8</td>
+<td>在 Debug 模式下，设置光标当前行为断点，如果当前已经是断点则去掉断点</td>
+</tr>
+<tr>
+<td>Command+F9</td>
+<td>执行 Make Project 操作</td>
+</tr>
+<tr>
+<td>Command+F11</td>
+<td>选中文件 / 文件夹，使用助记符设定 / 取消书签 （必备）</td>
+</tr>
+<tr>
+<td>Command+F12</td>
+<td>弹出当前文件结构层，可以在弹出的层上直接输入，进行筛选</td>
+</tr>
+<tr>
+<td>Command+Tab</td>
+<td>编辑窗口切换，如果在切换的过程又加按上 delete，则是关闭对应选中的窗口</td>
+</tr>
+<tr>
+<td>Command+End</td>
+<td>跳到文件尾</td>
+</tr>
+<tr>
+<td>Command+Home</td>
+<td>跳到文件头</td>
+</tr>
+<tr>
+<td>Command+Space</td>
+<td>基础代码补全，默认在 Windows 系统上被输入法占用，需要进行修改，建议修改为 Command +逗号 （必备）</td>
+</tr>
+<tr>
+<td>Command+Delete</td>
+<td>删除光标后面的单词或是中文句 （必备）</td>
+</tr>
+<tr>
+<td>Command+BackSpace</td>
+<td>删除光标前面的单词或是中文句 （必备）</td>
+</tr>
+<tr>
+<td>Command+1,2,3…9</td>
+<td>定位到对应数值的书签位置 （必备）</td>
+</tr>
+<tr>
+<td>Command+左键单击</td>
+<td>在打开的文件标题上，弹出该文件路径 （必备）</td>
+</tr>
+<tr>
+<td>Command+光标定位</td>
+<td>按 Command 不要松开，会显示光标所在的类信息摘要</td>
+</tr>
+<tr>
+<td>Command+左方向键</td>
+<td>光标跳转到当前单词 / 中文句的左侧开头位置 （必备）</td>
+</tr>
+<tr>
+<td>Command+右方向键</td>
+<td>光标跳转到当前单词 / 中文句的右侧开头位置 （必备）</td>
+</tr>
+<tr>
+<td>Command+前方向键</td>
+<td>等效于鼠标滚轮向前效果 （必备）</td>
+</tr>
+<tr>
+<td>Command+后方向键</td>
+<td>等效于鼠标滚轮向后效果 （必备）</td>
+</tr>
+</tbody></table>
+<h2 id="Option"><a href="#Option" class="headerlink" title="Option"></a>Option</h2><table>
+<thead>
+<tr>
+<th>快捷键</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Option+`</td>
+<td>显示版本控制常用操作菜单弹出层 （必备）</td>
+</tr>
+<tr>
+<td>Option+Q</td>
+<td>弹出一个提示，显示当前类的声明 / 上下文信息</td>
+</tr>
+<tr>
+<td>Option+F1</td>
+<td>显示当前文件选择目标弹出层，弹出层中有很多目标可以进行选择 （必备）</td>
+</tr>
+<tr>
+<td>Option+F2</td>
+<td>对于前面页面，显示各类浏览器打开目标选择弹出层</td>
+</tr>
+<tr>
+<td>Option+F3</td>
+<td>选中文本，逐个往下查找相同文本，并高亮显示</td>
+</tr>
+<tr>
+<td>Option+F7</td>
+<td>查找光标所在的方法 / 变量 / 类被调用的地方</td>
+</tr>
+<tr>
+<td>Option+F8</td>
+<td>在 Debug 的状态下，选中对象，弹出可输入计算表达式调试框，查看该输入内容的调试结果</td>
+</tr>
+<tr>
+<td>Option+Home</td>
+<td>定位 / 显示到当前文件的 Navigation Bar</td>
+</tr>
+<tr>
+<td>Option+Enter</td>
+<td>IntelliJ IDEA 根据光标所在问题，提供快速修复选择，光标放在的位置不同提示的结果也不同（必备）</td>
+</tr>
+<tr>
+<td>Option+Insert</td>
+<td>代码自动生成，如生成对象的 set / get 方法，构造函数，toString() 等（必备）</td>
+</tr>
+<tr>
+<td>Option+左方向键</td>
+<td>切换当前已打开的窗口中的子视图，比如 Debug 窗口中有 Output、Debugger 等子视图，用此快捷键就可以在子视图中切换（必备）</td>
+</tr>
+<tr>
+<td>Option+右方向键</td>
+<td>按切换当前已打开的窗口中的子视图，比如 Debug 窗口中有 Output、Debugger 等子视图，用此快捷键就可以在子视图中切换 （必备）</td>
+</tr>
+<tr>
+<td>Option+前方向键</td>
+<td>当前光标跳转到当前文件的前一个方法名位置 （必备）</td>
+</tr>
+<tr>
+<td>Option+后方向键</td>
+<td>当前光标跳转到当前文件的后一个方法名位置 （必备）</td>
+</tr>
+<tr>
+<td>Option+1,2,3…9</td>
+<td>显示对应数值的选项卡，其中 1 是 Project 用得最多 （必备）</td>
+</tr>
+</tbody></table>
+<h2 id="SHIFT"><a href="#SHIFT" class="headerlink" title="SHIFT"></a>SHIFT</h2><table>
+<thead>
+<tr>
+<th>快捷键</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Shift+F1</td>
+<td>如果有外部文档可以连接外部文档</td>
+</tr>
+<tr>
+<td>Shift+F2</td>
+<td>跳转到上一个高亮错误 或 警告位置</td>
+</tr>
+<tr>
+<td>Shift+F3</td>
+<td>在查找模式下，查找匹配上一个</td>
+</tr>
+<tr>
+<td>Shift+F4</td>
+<td>对当前打开的文件，使用新 Windows 窗口打开，旧窗口保留</td>
+</tr>
+<tr>
+<td>Shift+F6</td>
+<td>对文件 / 文件夹 重命名</td>
+</tr>
+<tr>
+<td>Shift+F7</td>
+<td>在 Debug 模式下，智能步入。断点所在行上有多个方法调用，会弹出进入哪个方法</td>
+</tr>
+<tr>
+<td>Shift+F8</td>
+<td>在 Debug 模式下，跳出，表现出来的效果跟 F9 一样</td>
+</tr>
+<tr>
+<td>Shift+F9</td>
+<td>等效于点击工具栏的 Debug 按钮</td>
+</tr>
+<tr>
+<td>Shift+F10</td>
+<td>等效于点击工具栏的 Run 按钮</td>
+</tr>
+<tr>
+<td>Shift+F11</td>
+<td>弹出书签显示层 （必备）</td>
+</tr>
+<tr>
+<td>Shift+Tab</td>
+<td>取消缩进 （必备）</td>
+</tr>
+<tr>
+<td>Shift+ESC</td>
+<td>隐藏当前 或 最后一个激活的工具窗口</td>
+</tr>
+<tr>
+<td>Shift+End</td>
+<td>选中光标到当前行尾位置</td>
+</tr>
+<tr>
+<td>Shift+Home</td>
+<td>选中光标到当前行头位置</td>
+</tr>
+<tr>
+<td>Shift+Enter</td>
+<td>开始新一行。光标所在行下空出一行，光标定位到新行位置 （必备）</td>
+</tr>
+<tr>
+<td>Shift+左键单击</td>
+<td>在打开的文件名上按此快捷键，可以关闭当前打开文件 （必备）</td>
+</tr>
+<tr>
+<td>Shift+滚轮前后滚动</td>
+<td>当前文件的横向滚动轴滚动 （必备）</td>
+</tr>
+</tbody></table>
+<h2 id="Command-Option"><a href="#Command-Option" class="headerlink" title="Command+Option"></a>Command+Option</h2><table>
+<thead>
+<tr>
+<th>快捷键</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Command+Option+L</td>
+<td>格式化代码，可以对当前文件和整个包目录使用 （必备）</td>
+</tr>
+<tr>
+<td>Command+Option+O</td>
+<td>优化导入的类，可以对当前文件和整个包目录使用 （必备）</td>
+</tr>
+<tr>
+<td>Command+Option+I</td>
+<td>光标所在行 或 选中部分进行自动代码缩进，有点类似格式化</td>
+</tr>
+<tr>
+<td>Command+Option+T</td>
+<td>对选中的代码弹出环绕选项弹出层 （必备）</td>
+</tr>
+<tr>
+<td>Command+Option+J</td>
+<td>弹出模板选择窗口，将选定的代码加入动态模板中</td>
+</tr>
+<tr>
+<td>Command+Option+H</td>
+<td>调用层次</td>
+</tr>
+<tr>
+<td>Command+Option+B</td>
+<td>在某个调用的方法名上使用会跳到具体的实现处，可以跳过接口</td>
+</tr>
+<tr>
+<td>Command+Option+V</td>
+<td>快速引进变量</td>
+</tr>
+<tr>
+<td>Command+Option+Y</td>
+<td>同步、刷新</td>
+</tr>
+<tr>
+<td>Command+Option+S</td>
+<td>打开 IntelliJ IDEA 系统设置 （必备）</td>
+</tr>
+<tr>
+<td>Command+Option+F7</td>
+<td>显示使用的地方。寻找被该类或是变量被调用的地方，用弹出框的方式找出来</td>
+</tr>
+<tr>
+<td>Command+Option+F11</td>
+<td>切换全屏模式</td>
+</tr>
+<tr>
+<td>Command+Option+Enter</td>
+<td>光标所在行上空出一行，光标定位到新行 （必备）</td>
+</tr>
+<tr>
+<td>Command+Option+Home</td>
+<td>弹出跟当前文件有关联的文件弹出层</td>
+</tr>
+<tr>
+<td>Command+Option+Space</td>
+<td>类名自动完成</td>
+</tr>
+<tr>
+<td>Command+Option+左方向键</td>
+<td>退回到上一个操作的地方 （必备）</td>
+</tr>
+<tr>
+<td>Command+Option+右方向键</td>
+<td>前进到上一个操作的地方 （必备）</td>
+</tr>
+<tr>
+<td>Command+Option+前方向键</td>
+<td>在查找模式下，跳到上个查找的文件</td>
+</tr>
+<tr>
+<td>Command+Option+后方向键</td>
+<td>在查找模式下，跳到下个查找的文件</td>
+</tr>
+</tbody></table>
+<h2 id="Command-SHIFT"><a href="#Command-SHIFT" class="headerlink" title="Command+SHIFT"></a>Command+SHIFT</h2><table>
+<thead>
+<tr>
+<th>快捷键</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Command+Shift+F</td>
+<td>根据输入内容查找整个项目 或 指定目录内文件 （必备）</td>
+</tr>
+<tr>
+<td>Command+Shift+R</td>
+<td>根据输入内容替换对应内容，范围为整个项目 或 指定目录内文件 （必备）</td>
+</tr>
+<tr>
+<td>Command+Shift+J</td>
+<td>自动将下一行合并到当前行末尾 （必备）</td>
+</tr>
+<tr>
+<td>Command+Shift+Z</td>
+<td>取消撤销 （必备）</td>
+</tr>
+<tr>
+<td>Command+Shift+W</td>
+<td>递进式取消选择代码块。可选中光标所在的单词或段落，连续按会在原有选中的基础上再扩展取消选中范围 （必备）</td>
+</tr>
+<tr>
+<td>Command+Shift+N</td>
+<td>通过文件名定位 / 打开文件 / 目录，打开目录需要在输入的内容后面多加一个正斜杠 （必备）</td>
+</tr>
+<tr>
+<td>Command+Shift+U</td>
+<td>对选中的代码进行大 / 小写轮流转换 （必备）</td>
+</tr>
+<tr>
+<td>Command+Shift+T</td>
+<td>对当前类生成单元测试类，如果已经存在的单元测试类则可以进行选择 （必备）</td>
+</tr>
+<tr>
+<td>Command+Shift+C</td>
+<td>复制当前文件磁盘路径到剪贴板 （必备）</td>
+</tr>
+<tr>
+<td>Command+Shift+V</td>
+<td>弹出缓存的最近拷贝的内容管理器弹出层</td>
+</tr>
+<tr>
+<td>Command+Shift+E</td>
+<td>显示最近修改的文件列表的弹出层</td>
+</tr>
+<tr>
+<td>Command+Shift+H</td>
+<td>显示方法层次结构</td>
+</tr>
+<tr>
+<td>Command+Shift+B</td>
+<td>跳转到类型声明处 （必备）</td>
+</tr>
+<tr>
+<td>Command+Shift+I</td>
+<td>快速查看光标所在的方法 或 类的定义</td>
+</tr>
+<tr>
+<td>Command+Shift+A</td>
+<td>查找动作 / 设置</td>
+</tr>
+<tr>
+<td>Command+Shift+/</td>
+<td>代码块注释 （必备）</td>
+</tr>
+<tr>
+<td>Command+Shift+[</td>
+<td>选中从光标所在位置到它的顶部中括号位置 （必备）</td>
+</tr>
+<tr>
+<td>Command+Shift+]</td>
+<td>选中从光标所在位置到它的底部中括号位置 （必备）</td>
+</tr>
+<tr>
+<td>Command+Shift++</td>
+<td>展开所有代码 （必备）</td>
+</tr>
+<tr>
+<td>Command+Shift+-</td>
+<td>折叠所有代码 （必备）</td>
+</tr>
+<tr>
+<td>Command+Shift+F7</td>
+<td>高亮显示所有该选中文本，按 Esc 高亮消失 （必备）</td>
+</tr>
+<tr>
+<td>Command+Shift+F8</td>
+<td>在 Debug 模式下，指定断点进入条件</td>
+</tr>
+<tr>
+<td>Command+Shift+F9</td>
+<td>编译选中的文件 / 包 / Module</td>
+</tr>
+<tr>
+<td>Command+Shift+F12</td>
+<td>编辑器最大化 （必备）</td>
+</tr>
+<tr>
+<td>Command+Shift+Space</td>
+<td>智能代码提示</td>
+</tr>
+<tr>
+<td>Command+Shift+Enter</td>
+<td>自动结束代码，行末自动添加分号 （必备）</td>
+</tr>
+<tr>
+<td>Command+Shift+ackspace</td>
+<td>退回到上次修改的地方 （必备）</td>
+</tr>
+<tr>
+<td>Command+Shift+,2,3…9</td>
+<td>快速添加指定数值的书签 （必备）</td>
+</tr>
+<tr>
+<td>Command+Shift+左键单击</td>
+<td>把光标放在某个类变量上，按此快捷键可以直接定位到该类中 （必备）</td>
+</tr>
+<tr>
+<td>Command+Shift+左方向键</td>
+<td>在代码文件上，光标跳转到当前单词 / 中文句的左侧开头位置，同时选中该单词 / 中文句（必备）</td>
+</tr>
+<tr>
+<td>Command+Shift+右方向键</td>
+<td>在代码文件上，光标跳转到当前单词 / 中文句的右侧开头位置，同时选中该单词 / 中文句（必备）</td>
+</tr>
+<tr>
+<td>Command+Shift+前方向键</td>
+<td>光标放在方法名上，将方法移动到上一个方法前面，调整方法排序 （必备）</td>
+</tr>
+<tr>
+<td>Command+Shift+后方向键</td>
+<td>光标放在方法名上，将方法移动到下一个方法前面，调整方法排序 （必备）</td>
+</tr>
+</tbody></table>
+<h2 id="Option-SHIFT"><a href="#Option-SHIFT" class="headerlink" title="Option+SHIFT"></a>Option+SHIFT</h2><table>
+<thead>
+<tr>
+<th>快捷键</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Option+Shift+N</td>
+<td>选择 / 添加 task （必备）</td>
+</tr>
+<tr>
+<td>Option+Shift+F</td>
+<td>显示添加到收藏夹弹出层 / 添加到收藏夹</td>
+</tr>
+<tr>
+<td>Option+Shift+C</td>
+<td>查看最近操作项目的变化情况列表</td>
+</tr>
+<tr>
+<td>Option+Shift+I</td>
+<td>查看项目当前文件</td>
+</tr>
+<tr>
+<td>Option+Shift+F7</td>
+<td>在Debug 模式下，下一步，进入当前方法体内，如果方法体还有方法，则会进入该内嵌的方法中，依此循环进入</td>
+</tr>
+<tr>
+<td>Option+Shift+F9</td>
+<td>弹出 Debug 的可选择菜单</td>
+</tr>
+<tr>
+<td>Option+Shift+F10</td>
+<td>弹出 Run 的可选择菜单</td>
+</tr>
+<tr>
+<td>Option+Shift+左键双击</td>
+<td>选择被双击的单词 / 中文句，按住不放，可以同时选择其他单词 / 中文句 （必备）</td>
+</tr>
+<tr>
+<td>Option+Shift+前方向键</td>
+<td>移动光标所在行向上移动 （必备）</td>
+</tr>
+<tr>
+<td>Option+Shift+后方向键</td>
+<td>移动光标所在行向下移动 （必备）</td>
+</tr>
+</tbody></table>
+<h2 id="Command-SHIFT-Option"><a href="#Command-SHIFT-Option" class="headerlink" title="Command+SHIFT+Option"></a>Command+SHIFT+Option</h2><table>
+<thead>
+<tr>
+<th>快捷键</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Command+Shift+Option+V</td>
+<td>无格式黏贴 （必备）</td>
+</tr>
+<tr>
+<td>Command+Shift+Option+N</td>
+<td>前往指定的变量 / 方法</td>
+</tr>
+<tr>
+<td>Command+Shift+Option+S</td>
+<td>打开当前项目设置 （必备）</td>
+</tr>
+<tr>
+<td>Command+Shift+Option+C</td>
+<td>复制参考信息</td>
+</tr>
+</tbody></table>
+<h3 id="OTHERS"><a href="#OTHERS" class="headerlink" title="OTHERS"></a>OTHERS</h3><table>
+<thead>
+<tr>
+<th>快捷键</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>F2</td>
+<td>跳转到下一个高亮错误 或 警告位置 （必备）</td>
+</tr>
+<tr>
+<td>F3</td>
+<td>在查找模式下，定位到下一个匹配处</td>
+</tr>
+<tr>
+<td>F4</td>
+<td>编辑源 （必备）</td>
+</tr>
+<tr>
+<td>F7</td>
+<td>在 Debug 模式下，进入下一步，如果当前行断点是一个方法，则进入当前方法体内，如果该方法体还有方法，则不会进入该内嵌的方法中</td>
+</tr>
+<tr>
+<td>F8</td>
+<td>在 Debug 模式下，进入下一步，如果当前行断点是一个方法，则不进入当前方法体内</td>
+</tr>
+<tr>
+<td>F9</td>
+<td>在 Debug 模式下，恢复程序运行，但是如果该断点下面代码还有断点则停在下一个断点上</td>
+</tr>
+<tr>
+<td>F11</td>
+<td>添加书签 （必备）</td>
+</tr>
+<tr>
+<td>F12</td>
+<td>回到前一个工具窗口 （必备）</td>
+</tr>
+<tr>
+<td>Tab缩进</td>
+<td>（必备）</td>
+</tr>
+<tr>
+<td>ESC</td>
+<td>从工具窗口进入代码文件窗口 （必备）</td>
+</tr>
+<tr>
+<td>连按两次Shift</td>
+<td>弹出 Search Everywhere 弹出层</td>
+</tr>
+</tbody></table>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/IDEA/" rel="tag"># IDEA</a>
+          
+            <a href="/tags/IDEA优化/" rel="tag"># IDEA优化</a>
+          
+            <a href="/tags/IDEA快捷键/" rel="tag"># IDEA快捷键</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/06/07/Docker常用命令.html" rel="next" title="Docker常用命令">
+                <i class="fa fa-chevron-left"></i> Docker常用命令
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">yeanson</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#常用参数设置"><span class="nav-number">1.</span> <span class="nav-text">常用参数设置</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#GC算法堆内存修改"><span class="nav-number">1.1.</span> <span class="nav-text">GC算法堆内存修改</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#常用配置修改"><span class="nav-number">1.2.</span> <span class="nav-text">常用配置修改</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Live-Template设置"><span class="nav-number">1.3.</span> <span class="nav-text">Live Template设置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#利用Live-Template设置自己的注释"><span class="nav-number">1.3.1.</span> <span class="nav-text">利用Live Template设置自己的注释</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#常用快捷键"><span class="nav-number">2.</span> <span class="nav-text">常用快捷键</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Command"><span class="nav-number">2.1.</span> <span class="nav-text">Command</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Option"><span class="nav-number">2.2.</span> <span class="nav-text">Option</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SHIFT"><span class="nav-number">2.3.</span> <span class="nav-text">SHIFT</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Command-Option"><span class="nav-number">2.4.</span> <span class="nav-text">Command+Option</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Command-SHIFT"><span class="nav-number">2.5.</span> <span class="nav-text">Command+SHIFT</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Option-SHIFT"><span class="nav-number">2.6.</span> <span class="nav-text">Option+SHIFT</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Command-SHIFT-Option"><span class="nav-number">2.7.</span> <span class="nav-text">Command+SHIFT+Option</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#OTHERS"><span class="nav-number">2.7.1.</span> <span class="nav-text">OTHERS</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">yeanson</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+</body>
+</html>
